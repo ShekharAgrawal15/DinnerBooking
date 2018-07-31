@@ -3,7 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Datepicker </title>
+  <title> Dinner Order </title>
+  <h1 align="center" style="color: green">Welcome to MUS San Jose Dinner Signup</h1>
+  <h3 align="center" style="color: green">Kindly remember to order before 2:30PM (Monday-Thursday)</h3>
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
 <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
@@ -12,59 +14,33 @@
  
 <div id="calendar_container" class="container">
 	<br>
-	<h4>Date:</h4>
-	<br>
+	<h4>Click below to select the dates (You can click multiple times to select dates of the current week):</h4>
 	<form id="calendar-page-form" action="" class="form-inline" method="post">
         MTK ID*:
         <input type="text" id="mtkid" name="mtkid" required><br><br>
-        <input type="text" id="datepicker" size="30" value="Click here to choose the date">
-        <input type="text" id="selected_dates" size="50">
+        <input type="text" id="datepicker" size="39" value="Click here to select multiple dates">
+        <input type="text" id="selected_dates" size="38">
 	    <input type="submit" class="btn btn-default" value="Submit Date">
+        <button type="reset" value="Reset" style="margin-left: 10px" size=""20>Reset</button>
     </form>
 </div>
   <script>
     var date_selected = ''
-//    var $date_val = ''
-   disableMonday = function(date) {
-   console.log(date);
-   var day = date.getDay();
-   if (day == 0) {
-      return [false] ;
-   }
-   else {
-       return [true] ;
-   }
-   }
-
     $( function() {
       $( "#datepicker" ).datepicker({
           firstDay: 1,
           beforeShowDay: function (date) {
-            //var monday = new Date("June 1, 2013 00:00:00"); Used it for testing
-
-            //Get today's date
             var monday = new Date();
-
-            //Set the time of today's date to 00:00:00
             monday.setHours(0,0,0,0);
-
             monday.setDate(monday.getDate() + 1 - (monday.getDay() || 4));
-
-            //Set the Date to Monday
             var sunday = new Date(monday);
-
-            //Now add 6 to Monday to get the Date of Sunday (End of that Week)
             sunday.setDate(monday.getDate() + 3);
-
-            //Now return the enabled and disabled dates to datepicker
             return [(date >= monday && date <= sunday), ''];
         } });
       $( "#datepicker" ).on( "change", function() {         
          var selected = $(this).val();
          $('#selected_dates').val($('#selected_dates').val() + selected + '; ');
          date_selected = selected;
-//       $date_val += $( "#datepicker" ).datepicker( "option", "dateFormat", $( this ).val() );
-//      console.log($('#datepicker').val());
       });
     } );
 
@@ -82,11 +58,9 @@
     })
     .done(function(data) {
       if (data.success) {
-        alert(data.success)
         window.location.href = '/home'
       }
       else {
-        alert(data.error)
         window.location.href = '/dinner'
       }
     });
