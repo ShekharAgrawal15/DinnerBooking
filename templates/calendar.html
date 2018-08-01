@@ -11,16 +11,18 @@
 <script src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 </head>
 <body>
- 
-<div id="calendar_container" class="container">
-	<br>
-	<h4>Click below to select the dates (You can click multiple times to select dates of the current week):</h4>
+
+
+<div align="center" ver id="calendar_container" class="container">
 	<form id="calendar-page-form" action="" class="form-inline" method="post">
         MTK ID*:
         <input type="text" id="mtkid" name="mtkid" required><br><br>
-        <input type="text" id="datepicker" size="39" value="Click here to select multiple dates">
-        <input type="text" id="selected_dates" size="38">
-	    <input type="submit" class="btn btn-default" value="Submit Date">
+        Dates:
+        <div align="center" id="datepicker"></div><br>
+        The following dates have been selected:<br>
+        <input type="text" id="selected_dates" style="vertical-align: top" size="39">
+        <br><br>
+	    <input type="submit" class="btn btn-default" value="Submit Dates"><br><br>
         <button type="reset" value="Reset" style="margin-left: 10px" size=""20>Reset</button>
     </form>
 </div>
