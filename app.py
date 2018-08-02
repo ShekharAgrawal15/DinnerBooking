@@ -11,10 +11,13 @@ def dinner_selection():
         print(processed_text)
         print(data['date_val'])
         finalDates = data['date_val'].replace('/', '-')
-        print(finalDates)
+        finalDates = finalDates.strip()
+        finalDates = finalDates.rstrip(';')
         splitDates = finalDates.split("; ")
-
         for selectedDates in splitDates:
+            f = open(selectedDates, "a+")
+            f.write(processed_text + "\n")
+            f.close()
             print(selectedDates)
         return jsonify({'success': "added date"})
 
